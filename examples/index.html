@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Stylized grass</title>
+    <script type="importmap">
+      { "imports": { "three": "/vendor/three.module.js" } }
+    </script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        overflow: hidden;
+        background: #faf8f2;
+      }
+      #field {
+        position: absolute;
+        inset: 0;
+        cursor: grab;
+        touch-action: none;
+      }
+      p {
+        position: absolute;
+        left: 24px;
+        bottom: 20px;
+        margin: 0;
+        font:
+          13px/1.5 ui-sans-serif,
+          system-ui,
+          sans-serif;
+        color: #4c5243;
+      }
+      [data-night] p {
+        color: #b9bcb2;
+      }
+    </style>
+  </head>
+  <body>
+    <main id="field"></main>
+    <p>Drag to turn. Keys 1–6: day, dusk, night, February, May, October.</p>
+    <script type="module">
+      import { mountField } from "../src/mount.js";
+      import { SKY } from "../src/meadow/dusk-sky.js";
+
+      const field = mountField(document.querySelector("#field"), {
+        seed: 7,
+        blades: 160000,
+        // The home page frames the field low, under its title. Centre it here.
+        look: { height: 2.5 },
+      });
+      field.rig.attach(document.querySelector("#field"));
+
+      /* The same looks the film cuts between: the blog's sunset, and its
+         season ring. */
+      const PAPER = { day: "#faf8f2", dusk: "#f6e3c4", night: "#14181c" };
+      const looks = [
+        [SKY.day, PAPER.day],
+        [SKY.dusk, PAPER.dusk],
+        [SKY.night, PAPER.night],
+        [
+          {
+            ...SKY.day,
+            grass: "#7e8470",
+            pale: "#a7a892",
+            deep: "#20303a",
+            warm: "#8e6a4e",
+            cold: "#c6cbc4",
+          },
+          PAPER.day,
+        ],
+        [
+          {
+            ...SKY.day,
+            grass: "#7fae4c",
+            pale: "#a8c579",
+            deep: "#093a3a",
+            warm: "#e0552a",
+            cold: "#c3c58c",
+          },
+          PAPER.day,
+        ],
+        [
+          {
+            ...SKY.day,
+            grass: "#a08a3c",
+            pale: "#c8ac60",
+            deep: "#33231f",
+            warm: "#b84a12",
+            cold: "#cbb98a",
+          },
+          PAPER.day,
+        ],
+      ];
+      addEventListener("keydown", (e) => {
+        const look = looks[Number(e.key) - 1];
+        if (!look) return;
+        field.light(look[0]);
+        document.body.style.background = look[1];
+        document.body.toggleAttribute("data-night", look[1] === PAPER.night);
+      });
+    </script>
+  </body>
+</html>

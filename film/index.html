@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>One blade, a whole meadow</title>
+    <script type="importmap">
+      { "imports": { "three": "/vendor/three.module.js" } }
+    </script>
+    <style>
+      /* The site's own faces, as variable fonts: the home page sets Fraunces
+         at opsz 12 with WONK on, which a static cut cannot draw. */
+      @font-face {
+        font-family: Fraunces;
+        src: url("./fonts/Fraunces-Variable.woff2") format("woff2");
+        font-weight: 100 900;
+      }
+      @font-face {
+        font-family: Geist;
+        src: url("./fonts/Geist-Variable.woff2") format("woff2");
+        font-weight: 100 900;
+      }
+      :root {
+        --paper: #faf8f2;
+        --ink: #22251e;
+        --ink-2: #4c5243;
+        --red: #b8431f;
+      }
+      html,
+      body {
+        margin: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+      }
+      body {
+        background: var(--paper);
+        color: var(--ink);
+        font-family: Geist, ui-sans-serif, system-ui, sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+      #field {
+        position: absolute;
+        inset: 0;
+      }
+      /* The home page's hero, at film scale: the name over the field. */
+      #card {
+        position: absolute;
+        inset-inline: 0;
+        top: 15.5vh;
+        display: grid;
+        justify-items: center;
+        text-align: center;
+        pointer-events: none;
+      }
+      h1 {
+        position: relative;
+        margin: 0;
+        font-family: Fraunces, Georgia, serif;
+        font-weight: 400;
+        font-size: 4.6vw;
+        line-height: 1;
+        letter-spacing: -0.028em;
+        white-space: nowrap;
+        font-variation-settings:
+          "wght" 340,
+          "opsz" 12,
+          "SOFT" 0,
+          "WONK" 1;
+      }
+      h1 span {
+        font-kerning: none;
+        font-variant-ligatures: none;
+        visibility: hidden;
+      }
+      h1 span.on {
+        visibility: visible;
+      }
+      .caret {
+        position: absolute;
+        top: 0.06em;
+        left: 0;
+        width: 0.1vw;
+        height: 0.96em;
+        background: var(--red);
+        opacity: 0;
+      }
+      #url {
+        margin: 2.4vh 0 0;
+        font-size: 1.4vw;
+        letter-spacing: 0.01em;
+        color: var(--ink-2);
+        opacity: 0;
+      }
+      [data-clean="true"] #card {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <main id="field"></main>
+    <div id="card" aria-hidden="true">
+      <h1 id="title"><i class="caret"></i></h1>
+      <p id="url">theboringblog.ai</p>
+    </div>
+    <script type="module" src="./film.js"></script>
+  </body>
+</html>
