@@ -1,5 +1,5 @@
-// A static server for the examples and the film: the repository's own files,
-// plus Three.js from node_modules under /vendor/. Localhost only.
+// A static server for the example: the repository's own files, plus Three.js
+// from node_modules under /vendor/. Localhost only.
 import { createServer } from "node:http";
 import { readFile } from "node:fs/promises";
 import { createRequire } from "node:module";
@@ -11,8 +11,6 @@ const three = dirname(createRequire(import.meta.url).resolve("three"));
 const TYPES = {
   ".html": "text/html",
   ".js": "text/javascript",
-  ".woff2": "font/woff2",
-  ".jpg": "image/jpeg",
 };
 
 export async function serve(port = 0) {
@@ -61,7 +59,5 @@ export async function serve(port = 0) {
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const { url } = await serve(Number(process.argv[2] ?? 4317));
-  console.log(`${url}/            the index`);
   console.log(`${url}/examples/   the meadow, live — drag to turn it`);
-  console.log(`${url}/film/       the film, playing — Space pauses, R restarts`);
 }

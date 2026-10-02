@@ -2,23 +2,16 @@
   "name": "stylized-grass",
   "version": "0.1.0",
   "private": true,
-  "description": "The stylized grass renderer from The Boring Blog, and the deterministic pipeline that films it.",
+  "description": "The stylized grass renderer from The Boring Blog: a painted meadow as plain ES modules on Three.js.",
   "type": "module",
   "engines": {
     "node": ">=20"
   },
   "scripts": {
     "start": "node serve.mjs",
-    "test": "node --test src/meadow/meadow.test.mjs",
-    "film": "node film/render.mjs",
-    "film:preview": "node film/render.mjs --preview",
-    "film:clean": "node film/render.mjs --clean",
-    "film:sfx": "node film/sfx.mjs"
+    "test": "node --test src/meadow/meadow.test.mjs"
   },
   "dependencies": {
     "three": "0.185.1"
-  },
-  "devDependencies": {
-    "@playwright/test": "1.62.0"
   }
 }
